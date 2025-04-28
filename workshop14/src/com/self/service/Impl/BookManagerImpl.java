@@ -32,7 +32,6 @@ public class BookManagerImpl implements BookManager {
 			System.out.println(book.getTitle()+"책이 등록되었습니다 . ");
 			numberOfBook++;
 		}
-		
 	}
 
 	@Override
