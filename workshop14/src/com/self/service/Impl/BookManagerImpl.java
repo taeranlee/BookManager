@@ -121,7 +121,6 @@ public class BookManagerImpl implements BookManager {
 		return findTitle;
 	}
 
-
 	@Override
 	public double getSumPriceOfBooks() {//모든 책의 가격 합치기~
 		double sum=0;
