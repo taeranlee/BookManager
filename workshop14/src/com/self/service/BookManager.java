@@ -1,5 +1,7 @@
 package com.self.service;
 
+import java.util.List;
+
 import com.self.vo.Book;
 
 public interface BookManager {
@@ -7,17 +9,17 @@ public interface BookManager {
 	void deleteBook(int isnb);
 	void updateBook(Book book);
 	Book getBook(int isnb);
-	Book[] getAllBook();
+	List<Book> getAllBook();
 	int getNumberOfBooks();
-	Book[] searchBookByTitle(String title);
-	Book[] searchBookByPrice(double min,double max);
+	List<Book> searchBookByTitle(String title);
+	List<Book> searchBookByPrice(double min,double max);
 	double getSumPriceOfBooks();
 	double getAvgPriceOFBooks();
 	
-	Book[] sortMagazineByMonth();
-	Book[] searchNovelByGenre();
+	List<Book> sortMagazineByMonth();
+	List<Book> searchNovelByGenre();
 	//특정 인터뷰 star가 나온 magazine들 찾기 
-	Book[] getstarOfMagazines(String starName);
+	List<Book> getstarOfMagazines(String starName);
 	
 	
 	
