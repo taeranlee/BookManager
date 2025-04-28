@@ -91,17 +91,17 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public Book[] getAllBook() {//모든 책 정보 반환하기 
-		Book[] bookInfo = new Book[idx];
-		System.arraycopy(books, 0, bookInfo, 0, idx);
-		return bookInfo;
+	public List<Book> getAllBook() {//모든 책 정보 반환하기 
+		ArrayList<Book> info= new ArrayList<Book>();
+		System.arraycopy(books, 0, info, 0, info.size());
+		return info;
 	}
 
 	@Override
 	public int getNumberOfBooks() {//등록된 책 숫자 
 		int bookCount =0;
-		for(int i =0;i<idx;i++) {
-			if(books[i]!=null) {
+		for(int i =0;i<books.size();i++) {
+			if(books.get(i)!=null) {
 				bookCount++;
 			}
 		}
@@ -140,31 +140,37 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public Book[] getstarOfMagazines(String starName) {//특정 스타가 인터뷰한 매거진들 찾기 
-		int i =0;
-		Book[] tempMagazines = new Book[idx];
-		for(Book b:books) {
-			if(b instanceof Magazine) {
-				if(((Magazine)b).getCoverStar().equals(starName)){
-					tempMagazines[i]=b;
-					i++;
-				}else if(containString(((Magazine)b).getInterviewStar(), starName)){
-					tempMagazines[i]=b;
-					i++;
-				}
-			}
-		}
-		if(i==0)System.out.println("해당 star가 인터뷰한 매거진이 없습니다. ");
-		return tempMagazines;
+	public List<Book> getStarOfMagazines(String starName) {
+	    List<Book> tempMagazines = new ArrayList<>();
+
+	    for (Book b : books) {
+	        if (b instanceof Magazine) {
+	            Magazine m = (Magazine) b;
+	            // 표지 스타가 일치하거나 인터뷰 스타 목록에 포함되어 있으면 추가
+	            if (starName.equals(m.getCoverStar()) 
+	                    || containString(m.getInterviewStar(), starName)) {
+	                tempMagazines.add(b);
+	            }
+	        }
+	    }
+
+	    if (tempMagazines.isEmpty()) {
+	        System.out.println("해당 스타가 인터뷰한 매거진이 없습니다.");
+	    }
+	    
+	    return tempMagazines;
 	}
 	
-	public boolean containString(String[] strings,String string) {
-		for(String s:strings) {
-			if(s!=null && s.equals(string)) {
-				return true;
-			}
-		}
-		return false;
+	public boolean containString(List<String> strings, String target) {
+	    if (strings == null) {
+	        return false;
+	    }
+	    for (String s : strings) {
+	        if (target.equals(s)) {
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 		
 
