@@ -19,7 +19,7 @@ public interface BookManager {
 	List<Book> sortMagazineByMonth();
 	List<Book> searchNovelByGenre();
 	//특정 인터뷰 star가 나온 magazine들 찾기 
-	List<Book> getstarOfMagazines(String starName);
+	List<Book> getStarOfMagazines(String starName);
 	
 	
 	
