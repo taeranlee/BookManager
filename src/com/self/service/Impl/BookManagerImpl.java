@@ -120,7 +120,7 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public List<Book> searchNovelByGenre() {
+	public List<Book> searchNovelByGenre(String genre) {
 		// TODO Auto-generated method stub
 		return null;
 	}
