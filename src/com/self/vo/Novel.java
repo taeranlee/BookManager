@@ -30,9 +30,13 @@ public class Novel extends Book{
 	public void publishSeries(int series) {
 		this.series = series;
 	}
+	
+	 public int compareTo(Book b) {
+	        return this.getTitle().compareTo(b.getTitle());  // title 기준으로 오름차순 정렬
+	    }
 
 	@Override
 	public String toString() {
-		return "Novel [genre=" + genre + ", series=" + series + "]";
+		return super.toString()+"Novel [genre=" + genre + ", series=" + series + "]";
 	}
 }

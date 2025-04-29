@@ -81,6 +81,12 @@ public class BookManagerTest {
         System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
         List<Book> novels = service.searchNovelByGenre("판타지");
         printBooks(novels);
+        
+        //10. Novel Title 기준 오름차순 정렬 
+        System.out.println("\n=== [9] Novel Title 기준 오름차순 정렬 ===");
+        List<Book> allBooks = service.getAllBook();
+        Collections.sort(service.getAllBook()); 
+        printBooks(service.getAllBook());// Novel 클래스에서 Comparable을 구현했으므로 기본 정렬 기준으로 정렬
     }
 
     // 리스트를 출력하는 공통 메서드
