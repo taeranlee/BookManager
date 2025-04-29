@@ -16,7 +16,6 @@ public interface BookManager {
 	double getSumPriceOfBooks();
 	double getAvgPriceOFBooks();
 	
-	List<Book> sortMagazineByMonth();
 	List<Book> searchNovelByGenre(String genre);
 	//특정 인터뷰 star가 나온 magazine들 찾기 
 	List<Book> getStarOfMagazines(String starName);

@@ -111,13 +111,6 @@ public class BookManagerImpl implements BookManager {
 		return getSumPriceOfBooks()/books.size();
 	}
 
-	@Override
-	public List<Book> sortMagazineByMonth() {
-		
-		Collections.sort(books);
-				
-		return books;
-	}
 
 	@Override
 	public List<Book> searchNovelByGenre(String genre) {
