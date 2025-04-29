@@ -78,18 +78,16 @@ public class BookManagerTest {
          printBooks(magazines);
 
         // 9. 특정 장르 소설 검색
-        // System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
-        // List<Book> novels = service.searchNovelByGenre("판타지");
-        // printBooks(novels);
+        System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
+        List<Book> novels = service.searchNovelByGenre("판타지");
+        printBooks(novels);
     }
 
     // 리스트를 출력하는 공통 메서드
     private static void printBooks(List<Book> books) {
         if (books != null && !books.isEmpty()) {
             for (Book b : books) {
-            	if(b instanceof Magazine) {
-            		System.out.println(b);
-            	}
+            	System.out.println(b);
             }
         } else {
             System.out.println("결과가 없습니다.");
