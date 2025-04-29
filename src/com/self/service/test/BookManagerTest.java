@@ -14,8 +14,8 @@ public class BookManagerTest {
 		// TODO Auto-generated method stub
 		BookManagerImpl service = BookManagerImpl.getInstance();
 		
-		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, "판타지",7 ));
-		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, "판타지",8 ));
+		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, Arrays.asList("판타지")));
+		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, Arrays.asList("판타지") ));
 		service.insertBook(new Novel(13, "궤도의 밖에서 ", "조앤롤링", "민음사", 24.1, "판타지",1 ));
 		service.insertBook(new Novel(14, "비행운 ", "32", "비트", 22.0, "스릴러",1 ));
 		service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", Arrays.asList("suzy", "IU", "WOODZ")));
