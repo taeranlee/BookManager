@@ -24,21 +24,22 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void insertBook(Book book) { //책추가 
+	public void insertBook(Book book) {
 		books.add(book);
-		
 	}
 
 	@Override
-	public void deleteBook(int isnb) {
-		// TODO Auto-generated method stub
-		
+	public void deleteBook(int isbn) {
+		books.removeIf(book -> book.getIsbn() == isbn);
 	}
 
 	@Override
 	public void updateBook(Book book) {
-		// TODO Auto-generated method stub
-		
+		for (int i=0;i<books.size() - 1;i++) {
+			if (book.getIsbn() == books.get(i).getIsbn()) {
+				books.set(i, book);
+			}
+		}
 	}
 
 	@Override
