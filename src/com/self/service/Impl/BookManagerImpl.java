@@ -1,6 +1,7 @@
 package com.self.service.Impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 
@@ -23,8 +24,8 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void insertBook(Book book) {
-		// TODO Auto-generated method stub
+	public void insertBook(Book book) { //책추가 
+		books.add(book);
 		
 	}
 
@@ -42,50 +43,72 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public Book getBook(int isnb) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
-	public List<Book> getAllBook() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> getAllBook() {//모든 책 정보 반환하기 
+		
+		return books;
 	}
 
 	@Override
-	public int getNumberOfBooks() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getNumberOfBooks() {//등록된 책 숫자 
+		
+		return books.size();
 	}
 
 	@Override
-	public List<Book> searchBookByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> searchBookByTitle(String title) {//제목으로 책찾기 
+		List<Book> findTitle = new ArrayList<Book>();
+		int idx = -1;
+		int sidx = -1;
+		for(Book b:books) {
+			if(b.getTitle().equals(title)) {
+				findTitle.add(b);
+			}
+		}
+		return findTitle;
+	}
+	
+	public List<Book> searchBookByPrice(double min, double max)
+	{
+		List<Book> findTitle = new ArrayList<Book>();
+		for(Book b:books) {
+			if(b.getPrice() >= min && b.getPrice() <= max) {
+				findTitle.add(b);
+			}
+		}
+		return findTitle;
+		
+	}
+
+
+
+	@Override
+	public double getSumPriceOfBooks() {//모든 책의 가격 합치기~
+		double sum = 0;
+		for(Book b :books) {
+			
+			sum += b.getPrice();
+
+		}
+		return sum;
 	}
 
 	@Override
-	public List<Book> searchBookByPrice(double min, double max) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double getSumPriceOfBooks() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double getAvgPriceOFBooks() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getAvgPriceOFBooks() {//모든 책 가격평균 구하기 
+		
+		return getSumPriceOfBooks()/books.size();
 	}
 
 	@Override
 	public List<Book> sortMagazineByMonth() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Collections.sort(books);
+				
+		return books;
 	}
 
 	@Override

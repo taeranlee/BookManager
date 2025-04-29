@@ -50,8 +50,25 @@ public class Magazine extends Book{
 
 	@Override
 	public String toString() {
-		return "Magazine [coverStar=" + coverStar + ", interviewStar=" + interviewStar + ", month="
+		return super.toString()+"Magazine [coverStar=" + coverStar + ", interviewStar=" + interviewStar + ", month="
 				+ month + "]";
+	}
+	
+	public int compareTo(Book b) {
+		
+		// 1. 제목(title) 오름차순 비교
+		int titleCompare = this.getTitle().compareTo(b.getTitle());
+		if (titleCompare != 0) {
+		        return titleCompare;
+		    }
+		
+		// 2. 제목이 같으면 month 오름차순 비교
+		if (b instanceof Magazine) {
+		    Magazine m = (Magazine) b;
+		    return Integer.compare(this.month, m.getMonth());
+		}
+	return super.compareTo(b);
+		
 	}
 
 	

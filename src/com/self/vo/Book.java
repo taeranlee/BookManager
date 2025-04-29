@@ -1,6 +1,6 @@
 package com.self.vo;
 
-public class Book {
+public class Book implements Comparable<Book> {
 	private int isbn;
 	private String title;
 	private String author;
@@ -63,6 +63,10 @@ public class Book {
 		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", publisher=" + publisher
 				+ ", price=" + price + "]";
 	};
+	
+	public int compareTo(Book b) {
+		return this.title.compareTo(b.getTitle());
+	}
 	
 	
 	

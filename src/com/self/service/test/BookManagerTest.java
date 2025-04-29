@@ -2,6 +2,7 @@ package com.self.service.test;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.util.Arrays;
+import java.util.List;
 
 import com.self.service.Impl.BookManagerImpl;
 import com.self.vo.Book;
@@ -16,10 +17,8 @@ public class BookManagerTest {
 		
 		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, Arrays.asList("판타지")));
 		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, Arrays.asList("판타지") ));
-		service.insertBook(new Novel(13, "궤도의 밖에서 ", "조앤롤링", "민음사", 24.1, "판타지",1 ));
-		service.insertBook(new Novel(14, "비행운 ", "32", "비트", 22.0, "스릴러",1 ));
-		service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", Arrays.asList("suzy", "IU", "WOODZ")));
-        service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
+		// service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", Arrays.asList("suzy", "IU", "WOODZ")));
+        // service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
         service.insertBook(new Magazine(23, "Elle", 4, "DD", "d", 11.6, "rosé", Arrays.asList("Jisoo", "Lisa")));
 
         // 9월호 (month = 9) -> 같은 잡지명 "Vogue" 또 등장 (다른 월호)
@@ -39,58 +38,61 @@ public class BookManagerTest {
         service.insertBook(new Magazine(31, "W Korea", 6, "II", "i", 16.0, "karina", Arrays.asList("Winter", "NingNing")));
 		
         
-        for(Book b:service.getAllBook()) {
-			System.out.println(b);
-		}
-		
-		
-		service.deleteBook(14);//isnb로 책 삭제 
-		
-		for(Book b:service.getAllBook()) {
-			System.out.println(b);
-		}//모든 책 출력 
-		
-		for(Book b:service.getAllBook()) {
-			System.out.println(service.getNumberOfBooks());
-			break;
-		}//저장된 책 갯수 
-		
-		for(Book b:service.getAllBook()) {
-			System.out.println(service.getAvgPriceOFBooks());
-			break;
-		}//책들의 평균가격 
-		
-		for(Book b:service.getAllBook()) {
-			System.out.println(service.getSumPriceOfBooks());
-			break;
-		}//책들의 모든 가격 
-		
-		Book[] foundBooks = service.searchBookByPrice(20.0, 30.0);
-		 for (Book b : foundBooks) {
-	            if (b != null) {
-	                System.out.println(b.getTitle() + " - " + b.getPrice() + "원");
-	            }
-	     }
-		
-		
-		Book[] magazines = service.getstarOfMagazines("jennie");
-		if (magazines != null) {
-            for (Book b : magazines) {
-                if (b != null) {
-                    System.out.println(b.getTitle());  // 매거진 제목 출력
-                }
-            }
-        }//jennie가 있는 매거진 모드 출력 
-		
-		Book[] seriesBooks = service.findGanreByPublisher("민음사", "판타지");
-		if(seriesBooks!=null) {
-			for(Book b:seriesBooks) {
-				if(b != null) {
-					System.out.println(b.getTitle());
-				}
-			}
-		}//민음사에서 나온 판타지 작품들중 시리즈물만 출력 
+        System.out.println("=== [1] 전체 책 목록 출력 ===");
+        printBooks(service.getAllBook());
 
-	}//main
+        // 2. 특정 ISBN 책 삭제
+        System.out.println("\n=== [2] ISBN 14번 책 삭제 후 목록 출력 ===");
+        service.deleteBook(14);
+        printBooks(service.getAllBook());
+
+        // 3. 책 개수 출력
+        System.out.println("\n=== [3] 등록된 책 수 ===");
+        System.out.println(service.getNumberOfBooks() + "권");
+
+        // 4. 평균 가격 출력
+        System.out.println("\n=== [4] 책들의 평균 가격 ===");
+        System.out.printf("%.2f원\n", service.getAvgPriceOFBooks());
+
+        // 5. 가격 총합 출력
+        System.out.println("\n=== [5] 책들의 가격 총합 ===");
+        System.out.printf("%.2f원\n", service.getSumPriceOfBooks());
+
+        // 6. 가격 범위로 책 검색
+        System.out.println("\n=== [6] 가격이 20~30만원 사이인 책 검색 ===");
+        List<Book> foundBooks = service.searchBookByPrice(20.0, 30.0);
+        printBooks(foundBooks);
+
+
+        // 7. 매거진 월별 정렬
+        System.out.println("\n=== [9] 매거진 월(month)순 정렬 후 전체 출력 ===");
+        printBooks(service.getAllBook());
+        System.out.println("*********sort 후************");
+        service.sortMagazineByMonth();
+        printBooks(service.getAllBook());
+        
+        // 8. 특정 스타가 인터뷰한 매거진 찾기
+        // System.out.println("\n=== [7] 인터뷰 스타가 'jennie'인 매거진 검색 ===");
+        // List<Book> magazines = service.getstarOfMagazines("jennie");
+        // printBooks(magazines);
+
+        // 9. 특정 장르 소설 검색
+        // System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
+        // List<Book> novels = service.searchNovelByGenre("판타지");
+        // printBooks(novels);
+    }
+
+    // 리스트를 출력하는 공통 메서드
+    private static void printBooks(List<Book> books) {
+        if (books != null && !books.isEmpty()) {
+            for (Book b : books) {
+            	if(b instanceof Magazine) {
+            		System.out.println(b);
+            	}
+            }
+        } else {
+            System.out.println("결과가 없습니다.");
+        }
+    }
 
 }//class
