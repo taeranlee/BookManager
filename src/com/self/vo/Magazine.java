@@ -65,7 +65,7 @@ public class Magazine extends Book{
 		// 2. 제목이 같으면 month 오름차순 비교
 		if (b instanceof Magazine) {
 		    Magazine m = (Magazine) b;
-		    return Integer.compare(this.month, m.getMonth());
+		    return ~Integer.compare(this.month, m.getMonth());
 		}
 	return super.compareTo(b);
 		
