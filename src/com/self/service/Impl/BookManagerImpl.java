@@ -42,22 +42,29 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public Book getBook(int isnb) {
-		
-		return null;
+	public Book getBook(int isnb) {//isnb로 책찾기 
+		Book findIsnb = null;
+		for(Book b:books) {
+			if(b.getIsbn()==isnb) {
+				findIsnb=b;
+			}
+		}
+		return findIsnb;
 	}
+
 
 	@Override
 	public List<Book> getAllBook() {//모든 책 정보 반환하기 
-		
-		return books;
+		ArrayList<Book> allBooks= new ArrayList<Book>();
+		allBooks.addAll(books);
+		return allBooks;
 	}
 
 	@Override
 	public int getNumberOfBooks() {//등록된 책 숫자 
-		
-		return books.size();
+		 return books.size();
 	}
+	
 
 	@Override
 	public List<Book> searchBookByTitle(String title) {//제목으로 책찾기 
@@ -119,8 +126,36 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public List<Book> getStarOfMagazines(String starName) {
-		// TODO Auto-generated method stub
-		return null;
+	    List<Book> tempMagazines = new ArrayList<>();
+
+	    for (Book b : books) {
+	        if (b instanceof Magazine) {
+	            Magazine m = (Magazine) b;
+	            // 표지 스타가 일치하거나 인터뷰 스타 목록에 포함되어 있으면 추가
+	            if (starName.equals(m.getCoverStar()) 
+	                    || containString(m.getInterviewStar(), starName)) {
+	                tempMagazines.add(b);
+	            }
+	        }
+	    }
+
+	    if (tempMagazines.isEmpty()) {
+	        System.out.println("해당 스타가 인터뷰한 매거진이 없습니다.");
+	    }
+	    
+	    return tempMagazines;
+	}
+	
+	public boolean containString(List<String> strings, String target) {
+	    if (strings == null) {
+	        return false;
+	    }
+	    for (String s : strings) {
+	        if (target.equals(s)) {
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 
 	
