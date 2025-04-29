@@ -25,21 +25,35 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public void insertBook(Book book) {
+		for (Book b : books) {
+			if (b.getIsbn() == book.getIsbn()) {
+				System.out.println("이미 등록된 책입니다.");
+				return ;
+			}
+		}
 		books.add(book);
 	}
 
 	@Override
 	public void deleteBook(int isbn) {
-		books.removeIf(book -> book.getIsbn() == isbn);
+		for (Book b : books) {
+			if (b.getIsbn() == isbn) {
+				books.removeIf(book -> book.getIsbn() == isbn);
+				return;
+			}
+		}
+		System.out.println("지우려는 책이 등록되어있지 않습니다.");
 	}
 
 	@Override
 	public void updateBook(Book book) {
-		for (int i=0;i<books.size() - 1;i++) {
+		for (int i=0;i<books.size()-1;i++) {
 			if (book.getIsbn() == books.get(i).getIsbn()) {
 				books.set(i, book);
+				return;
 			}
 		}
+		System.out.println("업데이트 하려는 책이 등록되어있지 않습니다.");
 	}
 
 	@Override

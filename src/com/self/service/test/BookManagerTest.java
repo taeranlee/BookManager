@@ -17,6 +17,7 @@ public class BookManagerTest {
 		BookManagerImpl service = BookManagerImpl.getInstance();
 		
 		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, Arrays.asList("판타지")));
+		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, Arrays.asList("판타지")));
 		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, Arrays.asList("판타지") ));
 		// service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", Arrays.asList("suzy", "IU", "WOODZ")));
         // service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
@@ -44,7 +45,7 @@ public class BookManagerTest {
 
         // 2. 특정 ISBN 책 삭제
         System.out.println("\n=== [2] ISBN 14번 책 삭제 후 목록 출력 ===");
-        service.deleteBook(14);
+        service.deleteBook(12);
         printBooks(service.getAllBook());
 
         // 3. 책 개수 출력

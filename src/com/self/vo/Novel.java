@@ -31,9 +31,9 @@ public class Novel extends Book{
 		this.series = series;
 	}
 	
-	 public int compareTo(Book b) {
-	        return this.getTitle().compareTo(b.getTitle());  // title 기준으로 오름차순 정렬
-	    }
+	public int compareTo(Book b) {
+		return this.getTitle().compareTo(b.getTitle());  // title 기준으로 오름차순 정렬
+	}
 
 	@Override
 	public String toString() {

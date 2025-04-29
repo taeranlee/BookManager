@@ -67,7 +67,7 @@ public class Magazine extends Book{
 		    Magazine m = (Magazine) b;
 		    return ~Integer.compare(this.month, m.getMonth());
 		}
-	return super.compareTo(b);
+		return super.compareTo(b);
 		
 	}
 
