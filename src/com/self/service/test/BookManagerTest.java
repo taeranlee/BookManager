@@ -2,6 +2,7 @@ package com.self.service.test;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.self.service.Impl.BookManagerImpl;
@@ -68,7 +69,7 @@ public class BookManagerTest {
         System.out.println("\n=== [9] 매거진 월(month)순 정렬 후 전체 출력 ===");
         printBooks(service.getAllBook());
         System.out.println("*********sort 후************");
-        service.sortMagazineByMonth();
+        Collections.sort(service.getAllBook());
         printBooks(service.getAllBook());
         
         // 8. 특정 스타가 인터뷰한 매거진 찾기
