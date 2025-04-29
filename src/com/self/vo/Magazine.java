@@ -11,15 +11,13 @@ public class Magazine extends Book{
 	
 	public Magazine() {}
 
-	public Magazine(int isbn, String title,int month,String author, String publisher, double price,String coverStar) {
+	public Magazine(int isbn, String title,int month,String author, String publisher, double price,String coverStar , List<String> interviewStar) {
 		super(isbn,title,author,publisher,price);
 		this.coverStar = coverStar;
-		this.interviewStar = new ArrayList<String>();
+		this.interviewStar = interviewStar;
 		this.month = month;
-		
 	}
 	
-
 	/**
 	 * @return the month
 	 */
