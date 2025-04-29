@@ -72,9 +72,9 @@ public class BookManagerTest {
         printBooks(service.getAllBook());
         
         // 8. 특정 스타가 인터뷰한 매거진 찾기
-        // System.out.println("\n=== [7] 인터뷰 스타가 'jennie'인 매거진 검색 ===");
-        // List<Book> magazines = service.getstarOfMagazines("jennie");
-        // printBooks(magazines);
+         System.out.println("\n=== [7] 인터뷰 스타가 'jennie'인 매거진 검색 ===");
+         List<Book> magazines = service.getStarOfMagazines("jennie");
+         printBooks(magazines);
 
         // 9. 특정 장르 소설 검색
         // System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
