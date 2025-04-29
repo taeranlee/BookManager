@@ -21,7 +21,4 @@ public interface BookManager {
 	//특정 인터뷰 star가 나온 magazine들 찾기 
 	List<Book> getStarOfMagazines(String starName);
 	
-	
-	
-
 }
