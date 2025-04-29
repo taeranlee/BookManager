@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Novel extends Book{
-	private List<String> ganre;
+	private List<String> genre;
 	private int series;
 	
 	public Novel() {}
 
-	public Novel(int isbn, String title, String author, String publisher, double price, int series) {
+	public Novel(int isbn, String title, String author, String publisher, double price, int series, List<String> genre) {
 		super(isbn,title,author,publisher,price);
-		this.ganre = new ArrayList<String>();
+		this.genre = genre;
 		this.series = series;
 	}
 
 	public List<String> getGanre() {
-		return ganre;
+		return genre;
 	}
 
-	public void setGanre(List<String> ganre) {
-		this.ganre = ganre;
+	public void setGanre(List<String> genre) {
+		this.genre = genre;
 	}
 
 	public int getSeries() {
@@ -33,9 +33,6 @@ public class Novel extends Book{
 
 	@Override
 	public String toString() {
-		return "Novel [ganre=" + ganre + ", series=" + series + "]";
+		return "Novel [genre=" + genre + ", series=" + series + "]";
 	}
-	
-	
-
 }
