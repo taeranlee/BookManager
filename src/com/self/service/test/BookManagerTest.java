@@ -67,28 +67,50 @@ public class BookManagerTest {
 
         // 7. 매거진 월별 정렬
         System.out.println("\n=== [9] 매거진 월(month)순 정렬 후 전체 출력 ===");
-        printBooks(service.getAllBook());
+        printMagazine(service.getAllBook());
         System.out.println("*********sort 후************");
         Collections.sort(service.getAllBook());
-        printBooks(service.getAllBook());
+        printMagazine(service.getAllBook());
         
         // 8. 특정 스타가 인터뷰한 매거진 찾기
          System.out.println("\n=== [7] 인터뷰 스타가 'jennie'인 매거진 검색 ===");
          List<Book> magazines = service.getStarOfMagazines("jennie");
-         printBooks(magazines);
+         printMagazine(magazines);
 
         // 9. 특정 장르 소설 검색
         System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
         List<Book> novels = service.searchNovelByGenre("판타지");
-        printBooks(novels);
+        printNovel(novels);
         
         //10. Novel Title 기준 오름차순 정렬 
         System.out.println("\n=== [9] Novel Title 기준 오름차순 정렬 ===");
         List<Book> allBooks = service.getAllBook();
         Collections.sort(service.getAllBook()); 
-        printBooks(service.getAllBook());// Novel 클래스에서 Comparable을 구현했으므로 기본 정렬 기준으로 정렬
+        printNovel(service.getAllBook());// Novel 클래스에서 Comparable을 구현했으므로 기본 정렬 기준으로 정렬
     }
-
+	
+	private static void printMagazine(List<Book> books) {
+        if (books != null && !books.isEmpty()) {
+            for (Book b : books) {
+            	if (b instanceof Magazine)
+            		System.out.println(b);
+            }
+        } else {
+            System.out.println("결과가 없습니다.");
+        }
+    }
+	
+	private static void printNovel(List<Book> books) {
+        if (books != null && !books.isEmpty()) {
+            for (Book b : books) {
+            	if (b instanceof Novel)
+            		System.out.println(b);
+            }
+        } else {
+            System.out.println("결과가 없습니다.");
+        }
+    }
+	
     // 리스트를 출력하는 공통 메서드
     private static void printBooks(List<Book> books) {
         if (books != null && !books.isEmpty()) {
