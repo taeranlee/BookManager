@@ -56,9 +56,8 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public List<Book> getAllBook() {//모든 책 정보 반환하기 
-		ArrayList<Book> allBooks= new ArrayList<Book>();
-		allBooks.addAll(books);
-		return allBooks;
+
+		return books;
 	}
 
 	@Override
