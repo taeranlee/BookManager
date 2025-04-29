@@ -121,8 +121,16 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public List<Book> searchNovelByGenre(String genre) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Book> temp = new ArrayList<Book>();
+		for (Book b : books) {
+			if (b instanceof Novel) {
+				for (String s : ((Novel)b).getGanre()) {
+					if (s.equals(genre))
+						temp.add(b);
+				}
+			}
+		}
+		return temp;
 	}
 
 	@Override
