@@ -1,6 +1,7 @@
 package com.self.service.test;
 
 import java.lang.management.GarbageCollectorMXBean;
+import java.util.Arrays;
 
 import com.self.service.Impl.BookManagerImpl;
 import com.self.vo.Book;
@@ -17,10 +18,28 @@ public class BookManagerTest {
 		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, "판타지",8 ));
 		service.insertBook(new Novel(13, "궤도의 밖에서 ", "조앤롤링", "민음사", 24.1, "판타지",1 ));
 		service.insertBook(new Novel(14, "비행운 ", "32", "비트", 22.0, "스릴러",1 ));
-		service.insertBook(new Magazine(21, "Vogue", "BB", "b", 12.3, "jennie", new String[] {"suzy","IU","WOODZ"}));
-		service.insertBook(new Magazine(22, "Bite", "DE", "h", 15.7, "IU", new String[] {"YK","EUJIN","Mark"}));
+		service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", Arrays.asList("suzy", "IU", "WOODZ")));
+        service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
+        service.insertBook(new Magazine(23, "Elle", 4, "DD", "d", 11.6, "rosé", Arrays.asList("Jisoo", "Lisa")));
+
+        // 9월호 (month = 9) -> 같은 잡지명 "Vogue" 또 등장 (다른 월호)
+        service.insertBook(new Magazine(24, "Vogue", 9, "BB", "b", 14.2, "jennie", Arrays.asList("suzy", "IU", "WOODZ")));
+        service.insertBook(new Magazine(25, "GQ", 9, "CC", "c", 15.3, "taeyong", Arrays.asList("Doyoung", "Mark")));
+
+        // 12월호
+        service.insertBook(new Magazine(26, "Harper's Bazaar", 12, "EE", "e", 17.8, "sana", Arrays.asList("Momo", "Mina")));
+        service.insertBook(new Magazine(27, "Singles", 12, "FF", "f", 10.5, "haerin", Arrays.asList("Minji", "Danielle")));
+
+        // 1월호
+        service.insertBook(new Magazine(28, "Elle", 1, "DD", "d", 11.5, "rosé", Arrays.asList("Lisa", "Jisoo")));
+        service.insertBook(new Magazine(29, "Arena Homme", 1, "GG", "g", 13.7, "jungkook", Arrays.asList("RM", "Jin", "SUGA")));
+
+        // 6월호
+        service.insertBook(new Magazine(30, "Cosmopolitan", 6, "HH", "h", 13.4, "seulgi", Arrays.asList("Wendy", "Joy")));
+        service.insertBook(new Magazine(31, "W Korea", 6, "II", "i", 16.0, "karina", Arrays.asList("Winter", "NingNing")));
 		
-		for(Book b:service.getAllBook()) {
+        
+        for(Book b:service.getAllBook()) {
 			System.out.println(b);
 		}
 		
