@@ -2,6 +2,7 @@ package com.self.service.Impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 
@@ -57,19 +58,19 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public Book getBook(int isnb) {//isnb로 책찾기 
-		Book findIsnb = null;
+	public Book getBook(int isbn) {//isnb로 책찾기 
+		Book findIsbn = null;
 		for(Book b:books) {
-			if(b.getIsbn()==isnb) {
-				findIsnb=b;
+			if(b.getIsbn()==isbn) {
+				findIsbn=b;
 			}
 		}
-		return findIsnb;
+		return findIsbn;
 	}
 
 
 	@Override
-	public List<Book> getAllBook() {//모든 책 정보 반환하기 
+	public HashMap<Integer, Book> getAllBook() {//모든 책 정보 반환하기 
 
 		return books;
 	}
@@ -81,7 +82,7 @@ public class BookManagerImpl implements BookManager {
 	
 
 	@Override
-	public List<Book> searchBookByTitle(String title) {//제목으로 책찾기 
+	public HashMap<Integer, Book> searchBookByTitle(String title) {//제목으로 책찾기 
 		List<Book> findTitle = new ArrayList<Book>();
 		int idx = -1;
 		int sidx = -1;
@@ -93,7 +94,7 @@ public class BookManagerImpl implements BookManager {
 		return findTitle;
 	}
 	
-	public List<Book> searchBookByPrice(double min, double max)
+	public HashMap<Integer, Book> searchBookByPrice(double min, double max)
 	{
 		List<Book> findTitle = new ArrayList<Book>();
 		for(Book b:books) {
@@ -126,7 +127,7 @@ public class BookManagerImpl implements BookManager {
 
 
 	@Override
-	public List<Book> searchNovelByGenre(String genre) {
+	public HashMap<Integer, Book> searchNovelByGenre(String genre) {
 		List<Book> temp = new ArrayList<Book>();
 		for (Book b : books) {
 			if (b instanceof Novel) {
@@ -140,7 +141,7 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public List<Book> getStarOfMagazines(String starName) {
+	public HashMap<Integer, Book> getStarOfMagazines(String starName) {
 	    List<Book> tempMagazines = new ArrayList<>();
 
 	    for (Book b : books) {
@@ -161,7 +162,7 @@ public class BookManagerImpl implements BookManager {
 	    return tempMagazines;
 	}
 	
-	public boolean containString(List<String> strings, String target) {
+	public boolean containString(HashMap<String, String>  strings, String target) {
 	    if (strings == null) {
 	        return false;
 	    }

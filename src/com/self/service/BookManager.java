@@ -1,23 +1,25 @@
 package com.self.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.self.vo.Book;
 
 public interface BookManager {
 	void insertBook(Book book);
-	void deleteBook(int isnb);
+	void deleteBook(int isbn);
 	void updateBook(Book book);
-	Book getBook(int isnb);
-	List<Book> getAllBook();
+	Book getBook(int isbn);
+	HashMap<Integer, Book> getAllBook();
 	int getNumberOfBooks();
-	List<Book> searchBookByTitle(String title);
-	List<Book> searchBookByPrice(double min,double max);
+	HashMap<Integer, Book> searchBookByTitle(String title);
+	HashMap<Integer, Book> searchBookByPrice(double min,double max);
 	double getSumPriceOfBooks();
 	double getAvgPriceOFBooks();
 	
-	List<Book> searchNovelByGenre(String genre);
+	HashMap<Integer, Book> searchNovelByGenre(String genre);
 	//특정 인터뷰 star가 나온 magazine들 찾기 
-	List<Book> getStarOfMagazines(String starName);
+	HashMap<Integer, Book> getStarOfMagazines(String starName);
 	
 }

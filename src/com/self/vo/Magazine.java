@@ -2,16 +2,17 @@ package com.self.vo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Magazine extends Book{
 	private String coverStar;
-	private List<String> interviewStar;
+	private HashMap<String, String> interviewStar;
 	private int month;
 	
 	public Magazine() {}
 
-	public Magazine(int isbn, String title,int month,String author, String publisher, double price,String coverStar , List<String> interviewStar) {
+	public Magazine(int isbn, String title,int month,String author, String publisher, double price,String coverStar , HashMap<String, String> interviewStar) {
 		super(isbn,title,author,publisher,price);
 		this.coverStar = coverStar;
 		this.interviewStar = interviewStar;
@@ -40,11 +41,11 @@ public class Magazine extends Book{
 		this.coverStar = coverStar;
 	}
 
-	public List<String> getInterviewStar() {
+	public HashMap<String, String> getInterviewStar() {
 		return interviewStar;
 	}
 
-	public void setInterviewStar(List<String> interviewStar) {
+	public void setInterviewStar(HashMap<String, String> interviewStar) {
 		this.interviewStar = interviewStar;
 	}
 
