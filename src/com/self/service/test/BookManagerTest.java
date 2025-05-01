@@ -24,20 +24,68 @@ public class BookManagerTest {
 		BookManagerImpl service = BookManagerImpl.getInstance();
 		
 		try {
-		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
-		// service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
-		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, new HashMap<>(Map.of(11, "판타지", 22, "어드벤처"))));
-		service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", new HashMap<>(Map.of(0, "suzy",1, "IU",2, "WOODZ"))));
-		//service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
-		service.insertBook(new Magazine(23, "Elle", 4, "DD", "d", 11.6, "rosé", new HashMap<>(Map.of(3, "Jisoo", 4,"Lisa"))));
-		service.insertBook(new Magazine(24, "Vogue", 9, "BB", "b", 14.2, "jennie", new HashMap<>(Map.of(5,"suzy", 6, "IU", 7,"WOODZ"))));
-		service.insertBook(new Magazine(25, "GQ", 9, "CC", "c", 15.3, "taeyong", new HashMap<>(Map.of(8, "Doyoung", 9, "Mark"))));
-		service.insertBook(new Magazine(26, "Harper's Bazaar", 12, "EE", "e", 17.8, "sana", new HashMap<>(Map.of(10,"Momo", 11,"Mina"))));
-		service.insertBook(new Magazine(27, "Singles", 12, "FF", "f", 10.5, "haerin", new HashMap<>(Map.of(12,"Minji",13, "Danielle"))));
-		service.insertBook(new Magazine(28, "Elle", 1, "DD", "d", 11.5, "rosé", new HashMap<>(Map.of(14,"Lisa",15, "Jisoo"))));
-		service.insertBook(new Magazine(29, "Arena Homme", 1, "GG", "g", 13.7, "jungkook", new HashMap<>(Map.of(16, "RM", 17, "Jin",18, "SUGA"))));
-		service.insertBook(new Magazine(30, "Cosmopolitan", 6, "HH", "h", 13.4, "seulgi", new HashMap<>(Map.of(19, "Wendy",20, "Joy"))));
-		service.insertBook(new Magazine(31, "W Korea", 6, "II", "i", 16.0, "karina", new HashMap<>(Map.of(21, "Winter", 22, "NingNing"))));
+			service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, new HashMap<>(Map.of(11, "판타지", 22, "어드벤처"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", new HashMap<>(Map.of(0, "suzy",1, "IU",2, "WOODZ"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+			//service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
+		try{
+			service.insertBook(new Magazine(23, "Elle", 4, "DD", "d", 11.6, "rosé", new HashMap<>(Map.of(3, "Jisoo", 4,"Lisa"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(24, "Vogue", 9, "BB", "b", 14.2, "jennie", new HashMap<>(Map.of(5,"suzy", 6, "IU", 7,"WOODZ"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(25, "GQ", 9, "CC", "c", 15.3, "taeyong", new HashMap<>(Map.of(8, "Doyoung", 9, "Mark"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(26, "Harper's Bazaar", 12, "EE", "e", 17.8, "sana", new HashMap<>(Map.of(10,"Momo", 11,"Mina"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(27, "Singles", 12, "FF", "f", 10.5, "haerin", new HashMap<>(Map.of(12,"Minji",13, "Danielle"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(28, "Elle", 1, "DD", "d", 11.5, "rosé", new HashMap<>(Map.of(14,"Lisa",15, "Jisoo"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(29, "Arena Homme", 1, "GG", "g", 13.7, "jungkook", new HashMap<>(Map.of(16, "RM", 17, "Jin",18, "SUGA"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(30, "Cosmopolitan", 6, "HH", "h", 13.4, "seulgi", new HashMap<>(Map.of(19, "Wendy",20, "Joy"))));
+		}catch (DuplicateBookException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			service.insertBook(new Magazine(31, "W Korea", 6, "II", "i", 16.0, "karina", new HashMap<>(Map.of(21, "Winter", 22, "NingNing"))));
 		}catch (DuplicateBookException e) {
 			System.out.println(e.getMessage());
 		}
