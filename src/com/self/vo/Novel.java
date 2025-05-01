@@ -1,26 +1,24 @@
 package com.self.vo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Novel extends Book{
-	private HashMap<String, String> genre;
+	private HashMap<Integer, String> genre;
 	private int series;
 	
 	public Novel() {}
 
-	public Novel(int isbn, String title, String author, String publisher, double price, int series, HashMap<String, String> genre) {
+	public Novel(int isbn, String title, String author, String publisher, double price, int series, HashMap<Integer, String> genre) {
 		super(isbn,title,author,publisher,price);
 		this.genre = genre;
 		this.series = series;
 	}
 
-	public HashMap<String, String>  getGanre() {
+	public HashMap<Integer, String> getGenre() {
 		return genre;
 	}
 
-	public void setGanre(HashMap<String, String>  genre) {
+	public void setGenre(HashMap<Integer, String>  genre) {
 		this.genre = genre;
 	}
 

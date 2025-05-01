@@ -7,12 +7,12 @@ import java.util.List;
 
 public class Magazine extends Book{
 	private String coverStar;
-	private HashMap<String, String> interviewStar;
+	private HashMap<Integer, String> interviewStar;
 	private int month;
 	
 	public Magazine() {}
 
-	public Magazine(int isbn, String title,int month,String author, String publisher, double price,String coverStar , HashMap<String, String> interviewStar) {
+	public Magazine(int isbn, String title,int month,String author, String publisher, double price,String coverStar , HashMap<Integer, String> interviewStar) {
 		super(isbn,title,author,publisher,price);
 		this.coverStar = coverStar;
 		this.interviewStar = interviewStar;
@@ -41,11 +41,11 @@ public class Magazine extends Book{
 		this.coverStar = coverStar;
 	}
 
-	public HashMap<String, String> getInterviewStar() {
+	public HashMap<Integer, String> getInterviewStar() {
 		return interviewStar;
 	}
 
-	public void setInterviewStar(HashMap<String, String> interviewStar) {
+	public void setInterviewStar(HashMap<Integer, String> interviewStar) {
 		this.interviewStar = interviewStar;
 	}
 
