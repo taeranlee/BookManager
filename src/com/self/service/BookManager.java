@@ -1,5 +1,6 @@
 package com.self.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ public interface BookManager {
 	void updateBook(Book book) throws EmptyBookException, BookNotFoundException;
 	Book getBook(int isbn) throws EmptyBookException, BookNotFoundException;
 	HashMap<Integer, Book> getAllBook() throws EmptyBookException;
+	ArrayList<Book> getAllBookForList() throws EmptyBookException;
 	int getNumberOfBooks();
 	HashMap<Integer, Book> searchBookByTitle(String title) throws EmptyBookException, BookNotFoundException;
 	HashMap<Integer, Book> searchBookByPrice(double min,double max) throws EmptyBookException, BookNotFoundException;

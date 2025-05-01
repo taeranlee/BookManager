@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 
 import com.self.service.BookManager;
@@ -69,6 +70,22 @@ public class BookManagerImpl implements BookManager {
 	}
 
 
+	public ArrayList<Book> getAllBookForList() throws EmptyBookException
+	{
+		if (books.isEmpty()) {
+			throw new EmptyBookException();
+		}
+		ArrayList<Book> temp = new ArrayList<Book>();
+		
+		// values 쓰는것보다 이렇게 하는게 정확하다.
+		Set<Integer> set = books.keySet();
+		for(Integer no:set) {
+			temp.add(books.get(no));
+		}
+		
+		
+		return temp;
+	}
 	@Override
 	public HashMap<Integer, Book> getAllBook() throws EmptyBookException
 	{//모든 책 정보 반환하기 

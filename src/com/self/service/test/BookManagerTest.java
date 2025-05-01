@@ -1,6 +1,7 @@
 package com.self.service.test;
 
 import java.lang.management.GarbageCollectorMXBean;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class BookManagerTest {
 		
 		try {
 		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
-		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
+		// service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
 		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, new HashMap<>(Map.of(11, "판타지", 22, "어드벤처"))));
 		service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", new HashMap<>(Map.of(0, "suzy",1, "IU",2, "WOODZ"))));
 		//service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
@@ -97,12 +98,17 @@ public class BookManagerTest {
 
 
         // 7. 매거진 월별 정렬
-//        System.out.println("\n=== [9] 매거진 월(month)순 정렬 후 전체 출력 ===");
-//        printMagazine(service.getAllBook());
-//        System.out.println("*********sort 후************");
-//        Collections.sort(service.getAllBook());
-//        printMagazine(service.getAllBook());
-//        
+        System.out.println("\n=== [9] 매거진 월(month)순 정렬 후 전체 출력 ===");
+        try {
+        	ArrayList<Book> sortList = service.getAllBookForList();
+	        printMagazine(sortList);
+	        System.out.println("*********sort 후************");
+	        Collections.sort(sortList);
+	        printMagazine(sortList);
+        } catch(EmptyBookException e) {
+        	System.out.println(e.getMessage());
+        }
+        
         // 8. 특정 스타가 인터뷰한 매거진 찾기
          System.out.println("\n=== [7] 인터뷰 스타가 'jennie'인 매거진 검색 ===");
          try {
@@ -124,7 +130,7 @@ public class BookManagerTest {
 			System.out.println(e.getMessage());
 		} catch (GenreNotFoundException e) {
 			System.out.println(e.getMessage());
-		}
+		} 
        
         
         //10. Novel Title 기준 오름차순 정렬 
@@ -168,6 +174,15 @@ public class BookManagerTest {
     }
 	
     // 리스트를 출력하는 공통 메서드
+	private static void printMagazine(ArrayList<Book> books) {
+		if(books != null && !books.isEmpty()) {
+			for(Book b : books) {
+				if(b instanceof Magazine) {
+					System.out.println(b);
+				}
+			}
+		}
+	}
     private static void printBooks(HashMap<Integer, Book> foundBooks) {
         if (foundBooks != null && !foundBooks.isEmpty()) {
             for (Book b : foundBooks.values()) {
