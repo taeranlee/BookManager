@@ -35,9 +35,9 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void deleteBook(int isbn) throws EmptyBookException, BookNotFoundException {
+	public void deleteBook(int isbn) throws BookNotFoundException {
 		if (books.isEmpty()) {
-			throw new EmptyBookException();
+			return;
 		}
 		if (!books.containsKey(isbn))
 			throw new BookNotFoundException();
@@ -46,9 +46,9 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void updateBook(Book book) throws EmptyBookException, BookNotFoundException{
+	public void updateBook(Book book) throws BookNotFoundException{
 		if (books.isEmpty()) {
-			throw new EmptyBookException();
+			return;
 		}
 		if (!books.containsKey(book.getIsbn()))
 			throw new BookNotFoundException();
@@ -58,10 +58,7 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public Book getBook(int isbn) throws EmptyBookException, BookNotFoundException {//isnb로 책찾기 
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+	public Book getBook(int isbn) throws BookNotFoundException {//isnb로 책찾기 
 		if (books.containsKey(isbn))
 			return books.get(isbn);
 		else {
@@ -70,11 +67,9 @@ public class BookManagerImpl implements BookManager {
 	}
 
 
-	public ArrayList<Book> getAllBookForList() throws EmptyBookException
+	public ArrayList<Book> getAllBookForList()
 	{
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+
 		ArrayList<Book> temp = new ArrayList<Book>();
 		
 		// values 쓰는것보다 이렇게 하는게 정확하다.
@@ -87,11 +82,9 @@ public class BookManagerImpl implements BookManager {
 		return temp;
 	}
 	@Override
-	public HashMap<Integer, Book> getAllBook() throws EmptyBookException
+	public HashMap<Integer, Book> getAllBook()
 	{//모든 책 정보 반환하기 
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+		
 		return books;
 	}
 
@@ -102,11 +95,9 @@ public class BookManagerImpl implements BookManager {
 	
 
 	@Override
-	public HashMap<Integer, Book> searchBookByTitle(String title) throws EmptyBookException, BookNotFoundException
+	public HashMap<Integer, Book> searchBookByTitle(String title) throws BookNotFoundException
 	{//제목으로 책찾기 
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+		
 		HashMap<Integer, Book> findTitle = new HashMap<Integer,Book>();
 		for (Map.Entry<Integer, Book> b : books.entrySet()) {
 			if (b.getValue().getTitle().equals(title)) {
@@ -119,11 +110,8 @@ public class BookManagerImpl implements BookManager {
 		return findTitle;
 	}
 	
-	public HashMap<Integer, Book> searchBookByPrice(double min, double max) throws EmptyBookException, BookNotFoundException
+	public HashMap<Integer, Book> searchBookByPrice(double min, double max) throws BookNotFoundException
 	{
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
 		HashMap<Integer, Book> findTitle = new HashMap<Integer, Book>();
 		for(Book b: books.values()) {
 			if(b.getPrice() >= min && b.getPrice() <= max) {
@@ -139,11 +127,8 @@ public class BookManagerImpl implements BookManager {
 
 
 	@Override
-	public double getSumPriceOfBooks() throws EmptyBookException 
+	public double getSumPriceOfBooks() 
 	{//모든 책의 가격 합치기~
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
 		double sum = 0;
 		for(Book b :books.values()) {
 			sum += b.getPrice();
@@ -152,20 +137,16 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public double getAvgPriceOFBooks() throws EmptyBookException  {//모든 책 가격평균 구하기 
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+	public double getAvgPriceOFBooks() {//모든 책 가격평균 구하기 
+		
 		return getSumPriceOfBooks()/books.size();
 	}
 
 
 	@Override
-	public HashMap<Integer, Book> searchNovelByGenre(String genre) throws EmptyBookException,GenreNotFoundException
+	public HashMap<Integer, Book> searchNovelByGenre(String genre)
 	{
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+		
 		int i=0;
 		HashMap<Integer, Book> findBook = new HashMap<Integer, Book>();
 		for (Map.Entry<Integer, Book> b : books.entrySet()) {
@@ -175,18 +156,13 @@ public class BookManagerImpl implements BookManager {
 					findBook.put(i++, b.getValue());
 			}
 		}
-		if (findBook.isEmpty()) {
-			throw new GenreNotFoundException();
-		}
 			
 		return findBook;
 	}
 
 	@Override
-	public HashMap<Integer, Book> getStarOfMagazines(String starName) throws EmptyBookException, BookNotFoundException {
-		if (books.isEmpty()) {
-			throw new EmptyBookException();
-		}
+	public HashMap<Integer, Book> getStarOfMagazines(String starName) throws BookNotFoundException {
+		
 		HashMap<Integer, Book> findBook = new HashMap<Integer, Book>();
 	    for (Map.Entry<Integer, Book> b : books.entrySet()) {
 	        if (b.getValue() instanceof Magazine) {

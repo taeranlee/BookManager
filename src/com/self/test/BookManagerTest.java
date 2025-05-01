@@ -1,4 +1,4 @@
-package com.self.service.test;
+package com.self.test;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.util.ArrayList;
@@ -10,8 +10,6 @@ import java.util.Map;
 
 import com.self.exception.BookNotFoundException;
 import com.self.exception.DuplicateBookException;
-import com.self.exception.EmptyBookException;
-import com.self.exception.GenreNotFoundException;
 import com.self.service.Impl.BookManagerImpl;
 import com.self.vo.Book;
 import com.self.vo.Magazine;
@@ -91,11 +89,8 @@ public class BookManagerTest {
 		}
         
 		System.out.println("=== [1] 전체 책 목록 출력 ===");
-		try {
         printBooks(service.getAllBook());
-		}catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
-		}
+		
        
 
         // 2. 특정 ISBN 책 삭제
@@ -104,9 +99,7 @@ public class BookManagerTest {
         try {
         	 service.deleteBook(24);
              printBooks(service.getAllBook());
-        }catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
-		}catch (BookNotFoundException e) {
+        }catch (BookNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -116,29 +109,22 @@ public class BookManagerTest {
 
         // 4. 평균 가격 출력
         System.out.println("\n=== [4] 책들의 평균 가격 ===");
-        try {
+       
         	System.out.printf("%.2f원\n", service.getAvgPriceOFBooks());
-		} catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
-		}
+	
         
 
         // 5. 가격 총합 출력
         System.out.println("\n=== [5] 책들의 가격 총합 ===");
-        try {
-        	System.out.printf("%.2f원\n", service.getSumPriceOfBooks());
-		} catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
-		}
         
+        	System.out.printf("%.2f원\n", service.getSumPriceOfBooks());
+
 
         // 6. 가격 범위로 책 검색
         System.out.println("\n=== [6] 가격이 10~30만원 사이인 책 검색 ===");
         try {
         	HashMap<Integer, Book> foundBooks = service.searchBookByPrice(10.0, 30.0);
             printBooks(foundBooks);
-		} catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
 		} catch (BookNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -147,23 +133,19 @@ public class BookManagerTest {
 
         // 7. 매거진 월별 정렬
         System.out.println("\n=== [9] 매거진 월(month)순 정렬 후 전체 출력 ===");
-        try {
+      
         	ArrayList<Book> sortList = service.getAllBookForList();
 	        printMagazine(sortList);
 	        System.out.println("*********sort 후************");
 	        Collections.sort(sortList);
 	        printMagazine(sortList);
-        } catch(EmptyBookException e) {
-        	System.out.println(e.getMessage());
-        }
+       
         
         // 8. 특정 스타가 인터뷰한 매거진 찾기
          System.out.println("\n=== [7] 인터뷰 스타가 'jennie'인 매거진 검색 ===");
          try {
         	 HashMap<Integer, Book> magazines = service.getStarOfMagazines("jennie");
              printMagazine(magazines);
-		} catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
 		} catch (BookNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -171,14 +153,9 @@ public class BookManagerTest {
 
         // 9. 특정 장르 소설 검색
         System.out.println("\n=== [8] '판타지' 장르 소설 검색 ===");
-        try {
         	 HashMap<Integer, Book> novels = service.searchNovelByGenre("판타지");
              printNovel(novels);
-		} catch (EmptyBookException e) {
-			System.out.println(e.getMessage());
-		} catch (GenreNotFoundException e) {
-			System.out.println(e.getMessage());
-		} 
+		
        
         
         //10. Novel Title 기준 오름차순 정렬 
@@ -190,8 +167,6 @@ public class BookManagerTest {
         System.out.println("\n=== [9] 타이틀 제목의 책 검색 ===");
         try {
         	 System.out.println(service.searchBookByTitle("룬과 친구"));
-		} catch (EmptyBookException e) {
-			System.out.println(e.getLocalizedMessage());
 		} catch (BookNotFoundException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
