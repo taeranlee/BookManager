@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
 
 import com.self.service.BookManager;
@@ -93,19 +94,14 @@ public class BookManagerImpl implements BookManager {
 			return null;
 		}
 		HashMap<Integer, Book> findTitle = new HashMap<Integer,Book>();
-		HashMap<String, Integer> temp = new HashMap<String, Integer>();
-		for (Book b : books.values()) 
-			temp.put(b.getTitle(), b.getIsbn());
-		if (!temp.containsKey(title)) {
-			System.out.println("찾으시는 제목의 책이 없습니다.");
-			return null;
+		for (Map.Entry<Integer, Book> b : books.entrySet()) {
+			if (b.getValue().getTitle().equals(title)) {
+				findTitle.put(b.getKey(), b.getValue());
+			}	
 		}
-		else {
-			for(Book b : books.values()) {
-				if (b.getIsbn() == temp.get(title)) {
-					findTitle.put(b.getIsbn(), b);
-				}
-			}
+		if (findTitle.isEmpty()) {
+			System.out.println("찾으시는 책의 제목이 없습니다.");
+			return null;
 		}
 		return findTitle;
 	}
@@ -156,14 +152,21 @@ public class BookManagerImpl implements BookManager {
 			System.out.println("등록된 책이 없습니다.");
 			return null;
 		}
-//		HashMap<Integer, Book> findBook = new HashMap<Integer, Book>();
-//		for (Book b : books.values()) {
-//			if (b instanceof Novel) {
-//				if (((Novel) b).getGenre().containsKey(genre))
-//					findBook.put(b.getIsbn(), b);
-//			}
-//		}
-		return null;
+		int i=0;
+		HashMap<Integer, Book> findBook = new HashMap<Integer, Book>();
+		for (Map.Entry<Integer, Book> b : books.entrySet()) {
+			if (b.getValue() instanceof Novel) {
+				 Novel n = (Novel) b.getValue();
+				if (containString(n.getGenre(), genre))
+					findBook.put(i++, b.getValue());
+			}
+		}
+		if (findBook.isEmpty()) {
+			System.out.println("찾으시는 책이 없습니다.");
+			return null;
+		}
+			
+		return findBook;
 	}
 
 	@Override
@@ -172,22 +175,23 @@ public class BookManagerImpl implements BookManager {
 			System.out.println("등록된 책이 없습니다.");
 			return null;
 		}
-		HashMap<Integer, Book> tempMagazines = new HashMap<Integer, Book>();
-//	    for (Book b : books.values()) {
-//	        if (b instanceof Magazine) {
-//	            Magazine m = (Magazine) b;
-//	            if (starName.equals(m.getCoverStar()) 
-//	                    || containString(m.getInterviewStar(), starName)) {
-//	                tempMagazines.put(b.getIsbn(), b);
-//	            }
-//	        }
-//	    }
-//
-//	    if (tempMagazines.isEmpty()) {
-//	        System.out.println("해당 스타가 인터뷰한 매거진이 없습니다.");
-//	    }
-//	    
-	    return null;
+		HashMap<Integer, Book> findBook = new HashMap<Integer, Book>();
+	    for (Map.Entry<Integer, Book> b : books.entrySet()) {
+	        if (b.getValue() instanceof Magazine) {
+	            Magazine m = (Magazine) b.getValue();
+	            if (m.getCoverStar().equals(starName) 
+	                    || containString(m.getInterviewStar(), starName)) {
+	                findBook.put(b.getKey(), b.getValue());
+	            }
+	        }
+	    }
+
+	    if (findBook.isEmpty()) {
+	        System.out.println("해당 스타가 인터뷰한 매거진이 없습니다.");
+	        return null;
+	    }
+	    
+	    return findBook;
 	}
 	
 	public boolean containString(HashMap<Integer, String> strings, String target) {

@@ -20,7 +20,7 @@ public class BookManagerTest {
 		
 		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
 		service.insertBook(new Novel(11, "해리포터", "조앤롤링", "민음사", 32.0, 8, new HashMap<>(Map.of(11, "판타지"))));
-		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, new HashMap<>(Map.of(11, "판타지"))));
+		service.insertBook(new Novel(12, "룬과 친구들", "박경자", "초록", 15.3, 8, new HashMap<>(Map.of(11, "판타지", 22, "어드벤처"))));
 		service.insertBook(new Magazine(21, "Vogue", 4, "BB", "b", 12.3, "jennie", new HashMap<>(Map.of(0, "suzy",1, "IU",2, "WOODZ"))));
 		//service.insertBook(new Magazine(22, "GQ", 4, "CC", "c", 13.8, "taeyong", Arrays.asList("Doyoung", "Mark")));
 		service.insertBook(new Magazine(23, "Elle", 4, "DD", "d", 11.6, "rosé", new HashMap<>(Map.of(3, "Jisoo", 4,"Lisa"))));
@@ -37,8 +37,8 @@ public class BookManagerTest {
         printBooks(service.getAllBook());
 
         // 2. 특정 ISBN 책 삭제
-        System.out.println("\n=== [2] ISBN 14번 책 삭제 후 목록 출력 ===");
-        service.deleteBook(12);
+        System.out.println("\n=== [2] ISBN 24번 책 삭제 후 목록 출력 ===");
+        service.deleteBook(24);
         printBooks(service.getAllBook());
 
         // 3. 책 개수 출력
@@ -54,8 +54,8 @@ public class BookManagerTest {
         System.out.printf("%.2f원\n", service.getSumPriceOfBooks());
 
         // 6. 가격 범위로 책 검색
-        System.out.println("\n=== [6] 가격이 20~30만원 사이인 책 검색 ===");
-        HashMap<Integer, Book> foundBooks = service.searchBookByPrice(20.0, 30.0);
+        System.out.println("\n=== [6] 가격이 10~30만원 사이인 책 검색 ===");
+        HashMap<Integer, Book> foundBooks = service.searchBookByPrice(10.0, 30.0);
         printBooks(foundBooks);
 
 
@@ -81,7 +81,11 @@ public class BookManagerTest {
 //        List<Book> allBooks = service.getAllBook();
 //        Collections.sort(service.getAllBook()); 
 //        printNovel(service.getAllBook());// Novel 클래스에서 Comparable을 구현했으므로 기본 정렬 기준으로 정렬
-    }
+        //11. title 검색
+        System.out.println("\n=== [9] 타이틀 제목의 책 검색 ===");
+        System.out.println(service.searchBookByTitle("룬과 친구들"));
+	
+	}
 	
 	private static void printMagazine(HashMap<Integer, Book> books) {
         if (books != null && !books.isEmpty()) {
